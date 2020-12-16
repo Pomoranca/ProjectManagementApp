@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,19 +24,28 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 @Composable
 fun TimelineScreen(project: Project = mockProject) {
     Column {
-        Text(project.title, style = typography.h1)
-        Row {
-            Text(text = "${project.days} days", style = typography.body2)
-            Text(
-                text = "|",
-                modifier = Modifier.padding(horizontal = 4.dp),
-                style = typography.body2
-            )
-            Text(text = project.date, style = typography.body2)
-        }
-        Row {
+        Column(Modifier.padding(horizontal = 20.dp, vertical = 16.dp)) {
+            Text(project.title, style = typography.h1)
+            Row {
+                Text(text = "${project.days} days", style = typography.body2)
+                Text(
+                    text = "|",
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    style = typography.body2
+                )
+                Text(text = project.date, style = typography.body2)
+            }
+
             AvatarList(users = project.users)
-            Avatar(user = zachary) //avatar to see how much spacing does avatarList take on screen
+        }
+        Column(
+            Modifier
+                .background(Color(0xFFF1F5FE), shape = RoundedCornerShape(topLeft = 40.dp))
+                .padding(top = 40.dp)
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(text = "Hello world")
+
         }
     }
 }
@@ -73,7 +83,7 @@ fun AvatarList(users: List<User>) {
 @Composable
 fun Avatar(user: User, modifier: Modifier = Modifier) {
     CoilImage(
-        user.imageUrlForSize(with(AmbientDensity.current){40.dp.toIntPx()}),
+        user.imageUrlForSize(with(AmbientDensity.current) { 40.dp.toIntPx() }),
         modifier = modifier
             .shadow(5.dp, CircleShape, clip = false)
             .background(Color.White, CircleShape)
