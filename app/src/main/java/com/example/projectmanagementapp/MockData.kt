@@ -30,7 +30,9 @@ class Task(
 class User(
     val id: Int,
     val name: String
-)
+) {
+    fun imageUrlForSize(size: Int) = "https://i.pravatar.cc/$size?img=$id"
+}
 
 val zachary = User(
     id = 1,
